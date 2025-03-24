@@ -135,3 +135,4 @@ C:\Users\mkhec\Documents\CodeStack 24-25\Level 3\Week 4\blog\obj\Debug\net8.0\re
 C:\Users\mkhec\Documents\CodeStack 24-25\Level 3\Week 4\blog\obj\Debug\net8.0\blog.pdb
 C:\Users\mkhec\Documents\CodeStack 24-25\Level 3\Week 4\blog\obj\Debug\net8.0\blog.genruntimeconfig.cache
 C:\Users\mkhec\Documents\CodeStack 24-25\Level 3\Week 4\blog\obj\Debug\net8.0\ref\blog.dll
+C:\Users\mkhec\Documents\CodeStack 24-25\Level 3\Week 4\blog\obj\Debug\net8.0\blog.sourcelink.json
