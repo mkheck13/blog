@@ -1,6 +1,9 @@
+using System.Text;
 using blog.Context;
 using blog.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,34 @@ builder.Services.AddCors(options => {
     });
 });
 
+var secretKey = builder.Configuration["JWT:key"];
+var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+
+// We're adding Auth to your build to check the JWToken from our services
+
+builder.Services.AddAuthentication(options => 
+{
+    // this line of code will set the Authentication behavior of our JWT Bearer
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    // Sets the default behavior for when our AUTH Fails
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer( options =>
+{
+    // Configuring JWT Bearer Options (checking the params)
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true, // Check if the Issuer is valid
+        ValidateAudience = true, // Checks if the Token's audience is valid
+        ValidateLifetime = true, // Ensure that our Token has not expired
+        ValidateIssuerSigningKey = true, // Checking the Token's signature is valid
+
+        ValidIssuer = "http://localhost:5000",
+        ValidAudience = "http://localhost:5000",
+        IssuerSigningKey = signingCredentials
+    };
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +64,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
