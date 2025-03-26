@@ -47,8 +47,8 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true, // Ensure that our Token has not expired
         ValidateIssuerSigningKey = true, // Checking the Token's signature is valid
 
-        ValidIssuer = "http://localhost:5000",
-        ValidAudience = "http://localhost:5000",
+        ValidIssuer = "https://heckermanblog25-gqfxdzfacffuhwed.westus-01.azurewebsites.net/",
+        ValidAudience = "https://heckermanblog25-gqfxdzfacffuhwed.westus-01.azurewebsites.net/",
         IssuerSigningKey = signingCredentials
     };
 });
